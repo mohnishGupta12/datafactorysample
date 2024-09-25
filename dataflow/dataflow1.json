@@ -53,12 +53,22 @@
 				"     updateable:false,",
 				"     upsertable:false,",
 				"     format: 'table',",
+				"     batchSize: 100,",
 				"     dateFormat:'MM/dd/yyyy',",
 				"     timestampFormat:'MM/dd/yyyy hh:mm:ss a',",
 				"     booleanFormat: ['1', '0'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     outputAssertFailedRows: true,",
+				"     assertFailure_folderPath: 'errorone',",
+				"     mapColumn(",
+				"          id,",
+				"          name,",
+				"          email,",
+				"          age,",
+				"          created_at",
+				"     )) ~> sink1"
 			]
 		}
 	}
