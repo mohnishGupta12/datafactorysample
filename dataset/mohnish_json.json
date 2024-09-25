@@ -1,0 +1,38 @@
+{
+	"name": "mohnish_json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "sample.json",
+				"fileSystem": "unprocessed"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "integer"
+				},
+				"name": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string"
+				},
+				"age": {
+					"type": "integer"
+				},
+				"created_at": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
