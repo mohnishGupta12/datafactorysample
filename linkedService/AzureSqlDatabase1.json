@@ -6,7 +6,7 @@
 		"typeProperties": {
 			"server": "mohnishsql-123.database.windows.net",
 			"database": "mohnish_gsql",
-			"encrypt": "mandatory",
+			"encrypt": "optional",
 			"trustServerCertificate": false,
 			"authenticationType": "SystemAssignedManagedIdentity"
 		}
