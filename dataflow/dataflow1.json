@@ -41,7 +41,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     documentForm: 'documentPerLine') ~> copydata",
+				"     documentForm: 'singleDocument') ~> copydata",
 				"copydata foldDown(unroll(),",
 				"     mapColumn(",
 				"          id,",
