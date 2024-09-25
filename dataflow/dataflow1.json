@@ -37,7 +37,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     documentForm: 'singleDocument',",
+				"     documentForm: 'arrayOfDocuments',",
 				"     wildcardPaths:['sample.json']) ~> copydata",
 				"copydata sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
