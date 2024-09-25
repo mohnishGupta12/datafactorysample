@@ -25,11 +25,7 @@
 					}
 				}
 			],
-			"transformations": [
-				{
-					"name": "flatten1"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(output(",
 				"          id as integer,",
@@ -42,17 +38,7 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     documentForm: 'singleDocument') ~> copydata",
-				"copydata foldDown(unroll(),",
-				"     mapColumn(",
-				"          id,",
-				"          name,",
-				"          email,",
-				"          age,",
-				"          created_at",
-				"     ),",
-				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"flatten1 sink(allowSchemaDrift: true,",
+				"copydata sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          id as integer,",
