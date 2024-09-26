@@ -10,6 +10,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "copydata"
+				},
+				{
+					"dataset": {
+						"referenceName": "customer_service",
+						"type": "DatasetReference"
+					},
+					"name": "customercopy"
 				}
 			],
 			"sinks": [
@@ -23,9 +30,24 @@
 						"referenceName": "AzureDataLakeStorage1",
 						"type": "LinkedServiceReference"
 					}
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSynapseAnalyticsTable1",
+						"type": "DatasetReference"
+					},
+					"name": "sink2",
+					"rejectedDataLinkedService": {
+						"referenceName": "AzureDataLakeStorage1",
+						"type": "LinkedServiceReference"
+					}
 				}
 			],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "alterRow1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          id as integer,",
@@ -39,6 +61,24 @@
 				"     ignoreNoFilesFound: false,",
 				"     documentForm: 'arrayOfDocuments',",
 				"     wildcardPaths:['sample.json']) ~> copydata",
+				"source(output(",
+				"          CustomerKey as short,",
+				"          WWICustomerID as short,",
+				"          Customer as string,",
+				"          BillToCustomer as string,",
+				"          Category as string,",
+				"          BuyingGroup as string,",
+				"          PrimaryContact as string,",
+				"          PostalCode as string,",
+				"          ValidFrom as string,",
+				"          ValidTo as string,",
+				"          LineageKey as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     wildcardPaths:['dimension_customer.csv']) ~> customercopy",
+				"customercopy alterRow(deleteIf(CustomerKey==0)) ~> alterRow1",
 				"copydata sink(allowSchemaDrift: false,",
 				"     validateSchema: true,",
 				"     input(",
@@ -56,10 +96,25 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     saveOrder: 1,",
+				"     saveOrder: 0,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     outputAssertFailedRows: true,",
-				"     assertFailure_folderPath: 'errorone') ~> sink1"
+				"     assertFailure_folderPath: 'errorone') ~> sink1",
+				"alterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     outputAssertFailedRows: true,",
+				"     assertFailure_fileSystem: 'processed',",
+				"     assertFailure_folderPath: 'error') ~> sink2"
 			]
 		}
 	}
