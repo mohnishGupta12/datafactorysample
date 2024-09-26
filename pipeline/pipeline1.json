@@ -19,6 +19,13 @@
 						"referenceName": "dataflow1",
 						"type": "DataFlowReference"
 					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "AzureDataLakeStorage2",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "synapse-filesystem/cust"
+					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
