@@ -14,6 +14,15 @@
 		"AzureSqlDatabase1_properties_typeProperties_database": {
 			"value": "mohnish_gsql"
 		},
+		"AzureSynapseAnalytics1_properties_typeProperties_server": {
+			"value": "mohnish-synapse.sql.azuresynapse.net"
+		},
+		"AzureSynapseAnalytics1_properties_typeProperties_database": {
+			"value": "synsql"
+		},
+		"AzureDataLakeStorage2_properties_typeProperties_url": {
+			"value": "https://mohsyngen2.dfs.core.windows.net/"
+		},
 		"containerUri": {
 			"value": ""
 		},
